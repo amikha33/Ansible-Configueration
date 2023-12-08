@@ -1,0 +1,25 @@
+---
+- name: Update APT package cache
+  hosts: localhost
+  connection: local
+  become: yes  # Run tasks with elevated privileges (sudo)
+
+  tasks:
+    - name: Update APT package cache
+      apt:
+        update_cache: yes
+
+- name: Manage Package
+  hosts: localhost
+  connection: local
+  become: yes
+
+  vars:
+    package_name: "{{ lookup('env', 'PACKAGE_NAME') | default('nginx') }}"
+    package_state: "{{ lookup('env', 'PACKAGE_STATE') | default('present') }}"  # Default to 'present' if not specified
+
+  tasks:
+    - name: Install or remove the package
+      apt:
+        name: "{{ package_name }}"
+        state: "{{ package_state }}"
