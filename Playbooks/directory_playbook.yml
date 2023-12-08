@@ -1,0 +1,37 @@
+---
+- name: Create and Delete Directory
+  hosts: localhost
+  gather_facts: false
+  vars:
+    directory_name: "{{ lookup('env', 'DIRECTORY_NAME') | default('default_directory') }}"
+
+  tasks:
+    - name: Create Directory
+      ansible.builtin.file:
+        path: "{{ directory_name }}"
+        state: directory
+      register: create_result
+      ignore_errors: true
+      tags:
+        - create
+
+    - name: Debug Create Result
+      ansible.builtin.debug:
+        var: create_result
+      tags:
+        - create
+
+    - name: Delete Directory
+      ansible.builtin.file:
+        path: "{{ directory_name }}"
+        state: absent
+      register: delete_result
+      ignore_errors: true
+      tags:
+        - delete
+
+    - name: Debug Delete Result
+      ansible.builtin.debug:
+        var: delete_result
+      tags:
+        - delete
