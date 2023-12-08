@@ -1,0 +1,18 @@
+---
+- name: Execute Commands on Target
+  hosts: localhost  # Change this to your actual target group
+  become: yes  # Run tasks with elevated privileges (sudo)
+
+  vars:
+    input_commands: "{{ input_commands | default([]) }}"
+
+  tasks:
+    - name: Run Custom Commands
+      command: "{{ item }}"
+      register: command_output
+      with_items: "{{ input_commands }}"
+
+    - name: Display Command Output
+      debug:
+        var: command_output.results[ansible_loop.index0].stdout_lines
+      with_items: "{{ input_commands }}"
