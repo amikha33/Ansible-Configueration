@@ -22,3 +22,7 @@
         - service_result.failed | default(false)
         - required_args is defined
         - service_result.changed.keys() | difference(required_args) | length > 0
+
+
+# ansible-playbook -i localhost, service_playbook.yaml -e "service_name=jenkins desired_state=stopped"
+# ansible-playbook -i localhost, service_playbook.yaml -e "service_name=jenkins desired_state=started
