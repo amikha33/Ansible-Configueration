@@ -1,0 +1,33 @@
+---
+- name: File Operations Playbook
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Create file
+      ansible.builtin.file:
+        path: "{{ file_path }}"
+        state: touch
+      tags:
+        - create_file
+
+    - name: Copy file using SCP
+      ansible.builtin.scp:
+        src: "{{ file_src }}"
+        dest: "{{ file_path }}"
+      when: file_src is defined
+      tags:
+        - copy_file
+
+    - name: Delete file
+      ansible.builtin.file:
+        path: "{{ file_path }}"
+        state: absent
+      when: delete_file is defined and delete_file | bool
+      tags:
+        - delete_file
+
+    - name: Run the file
+      ansible.builtin.command: "{{ file_path }}"
+      when: run_file is defined and run_file | bool
+      tags:
+        - run_file
