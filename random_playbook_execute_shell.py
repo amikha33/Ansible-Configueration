@@ -1,36 +1,47 @@
-#!/usr/bin/env python
-
 import subprocess
+import yaml
 
-# Set the playbook path
-playbook_path = "Playbooks/executecommand_playbook.yml"
+def run_ansible_playbook(commands):
+    # Split user input into a list of commands
+    commands_list = [cmd.strip() for cmd in commands.split(',')]
 
-# Prompt the user for input_commands for the new playbook
-input_commands_str = input("Enter input commands (comma-separated): ")
-input_commands = [cmd.strip() for cmd in input_commands_str.split(',')]
-extra_vars = {"input_commands": input_commands}
+    # Format input commands for YAML
+    input_commands_yaml = "\n      - ".join(f'"{cmd}"' for cmd in commands_list)
 
-# Set other variables
-ask_become_pass = True  # Set to True if you want to prompt for the become password
+    # Create a temporary YAML file with the provided commands
+    playbook_content = f"""
+---
+- name: Execute Commands on Target
+  hosts: localhost
+  become: yes
 
-# Convert extra_vars to a string
-extra_vars_str = ' '.join([f"{key}={value}" for key, value in extra_vars.items()])
+  vars:
+    input_commands:
+      - {input_commands_yaml}
 
-# Build the ansible-playbook command
-command = [
-    'ansible-playbook',
-    playbook_path,
-    '--extra-vars', extra_vars_str,
-]
+  tasks:
+    - name: Run Custom Commands
+      command: "{{{{ item }}}}"
+      register: command_output
+      with_items: "{{{{ input_commands }}}}"
 
-# Include --ask-become-pass if necessary
-if ask_become_pass:
-    command.append('--ask-become-pass')
-    become_pass = input("Enter become password: ")
-    process = subprocess.Popen(command, stdin=subprocess.PIPE)
-    process.communicate(input=become_pass.encode())
-else:
-    process = subprocess.run(command)
+    - name: Display Command Output
+      debug:
+        var: item.stdout_lines
+      with_items: "{{{{ command_output.results }}}}"
+"""
+    with open('temp_playbook.yml', 'w') as temp_playbook:
+        temp_playbook.write(playbook_content)
 
-# Print the return code
-print(f"Return code: {process.returncode}")
+    # Run Ansible playbook using subprocess
+    subprocess.run(['ansible-playbook', 'temp_playbook.yml'])
+
+    # Remove the temporary playbook file
+    subprocess.run(['rm', 'temp_playbook.yml'])
+
+if __name__ == "__main__":
+    # Get user input for commands
+    user_input = input("Enter commands separated by commas (e.g., df -h, ls -l): ")
+    
+    # Run Ansible playbook with user-provided commands
+    run_ansible_playbook(user_input)
