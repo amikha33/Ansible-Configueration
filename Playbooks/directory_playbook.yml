@@ -1,6 +1,8 @@
 ---
 - name: Create and Delete Directory
   hosts: localhost
+  connection: local
+
   gather_facts: false
   vars:
     directory_name: "{{ lookup('env', 'DIRECTORY_NAME') | default('default_directory') }}"
@@ -35,3 +37,6 @@
         var: delete_result
       tags:
         - delete
+
+# To Run it DIRECTORY_NAME=/home/agad/booking DIRECTORY_OPERATION=create ansible-playbook -i localhost, directory_playbook.yml --tags create
+        
