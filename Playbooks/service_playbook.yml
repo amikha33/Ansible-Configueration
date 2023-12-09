@@ -1,13 +1,17 @@
----
 - hosts: localhost
   connection: local
   gather_facts: false
+  become: yes  # Run the entire playbook with elevated privileges
   tasks:
     - name: Ensure service is in the desired state
       ansible.builtin.service:
         name: "{{ service_name }}"
         state: "{{ desired_state | default('started') }}"
       register: service_result
+
+    - name: Debug service result
+      ansible.builtin.debug:
+        var: service_result
 
     - name: Display results
       ansible.builtin.debug:
@@ -22,7 +26,3 @@
         - service_result.failed | default(false)
         - required_args is defined
         - service_result.changed.keys() | difference(required_args) | length > 0
-
-
-# ansible-playbook -i localhost, service_playbook.yaml -e "service_name=jenkins desired_state=stopped"
-# ansible-playbook -i localhost, service_playbook.yaml -e "service_name=jenkins desired_state=started
