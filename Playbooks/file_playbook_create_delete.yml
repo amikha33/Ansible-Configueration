@@ -1,0 +1,16 @@
+# Example Ansible playbook (create_delete_file.yml)
+---
+- name: Create or Delete File
+  hosts: localhost
+  tasks:
+    - name: Create File
+      ansible.builtin.file:
+        path: "{{ file_directory }}/{{ file_name }}"
+        state: touch
+      when: file_action == "create"
+
+    - name: Delete File
+      ansible.builtin.file:
+        path: "{{ file_directory }}/{{ file_name }}"
+        state: absent
+      when: file_action == "delete"
