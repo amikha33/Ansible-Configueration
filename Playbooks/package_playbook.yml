@@ -23,3 +23,4 @@
       apt:
         name: "{{ package_name }}"
         state: "{{ package_state }}"
+#PACKAGE_NAME=nginx  PACKAGE_STATE=present  ansible-playbook package_playbook.yml  --ask-become-pass
