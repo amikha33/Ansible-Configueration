@@ -15,3 +15,5 @@
       debug:
         var: item.stdout_lines
       with_items: "{{ command_output.results }}"
+
+# to run this playbook ansible-playbook random_playbook.yml --extra-vars "input_commands=\"['echo Hello', 'uptime', 'df -h']\"" --ask-become-pass
