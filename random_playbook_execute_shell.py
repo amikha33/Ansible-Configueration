@@ -3,7 +3,7 @@
 import subprocess
 
 # Set the playbook path
-playbook_path = "random_playbook.yml"
+playbook_path = "Playbooks/executecommand_playbook.yml"
 
 # Prompt the user for input_commands for the new playbook
 input_commands_str = input("Enter input commands (comma-separated): ")

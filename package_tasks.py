@@ -17,7 +17,7 @@ os.environ['PACKAGE_NAME'] = package_name
 os.environ['PACKAGE_STATE'] = package_state
 
 # Define the command to run the playbook
-command = ['ansible-playbook', 'package_playbook.yml', '--ask-become-pass']
+command = ['ansible-playbook', 'Playbooks/package_playbook.yml', '--ask-become-pass']
 
 # Run the command
 process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
