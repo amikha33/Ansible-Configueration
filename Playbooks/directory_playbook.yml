@@ -1,6 +1,6 @@
 ---
 - name: Create and Delete Directory
-  hosts: localhost
+  hosts: all
   connection: local
 
   gather_facts: false
