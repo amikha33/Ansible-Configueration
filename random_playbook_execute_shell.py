@@ -34,7 +34,7 @@ def run_ansible_playbook(commands):
         temp_playbook.write(playbook_content)
 
     # Run Ansible playbook using subprocess
-    subprocess.run(['ansible-playbook', 'temp_playbook.yml','-i', 'Playbooks/inventory.ini,',])
+    subprocess.run(['ansible-playbook', 'temp_playbook.yml','-i', 'Playbooks/inventory.ini',])
 
     # Remove the temporary playbook file
     subprocess.run(['rm', 'temp_playbook.yml'])
