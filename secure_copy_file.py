@@ -3,7 +3,7 @@ import subprocess
 def run_ansible_playbook(source_path, destination_path, sudo_password):
     playbook_content = f"""
 ---
-- name: Copy File
+- name: Copy File and Folders
   hosts: all
   become: yes
   gather_facts: false
@@ -28,7 +28,7 @@ def run_ansible_playbook(source_path, destination_path, sudo_password):
         print(f"Error executing Ansible playbook: {e}")
 
 if __name__ == "__main__":
-    source_path = input("Enter source path: ")
+    source_path = input("Enter source path File or direcrotry : ")
     destination_path = input("Enter destination path: ")
     sudo_password = input("Enter sudo password: ")
 
