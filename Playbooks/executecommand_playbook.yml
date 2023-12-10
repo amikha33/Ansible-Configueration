@@ -1,5 +1,5 @@
 - name: Execute Commands on Target
-  hosts: localhost  # Change this to your actual target group
+  hosts: all  # Change this to your actual target group
   become: yes  # Run tasks with elevated privileges (sudo)
 
   vars:
