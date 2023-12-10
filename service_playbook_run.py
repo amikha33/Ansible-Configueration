@@ -7,7 +7,7 @@ desired_state = input("Enter the desired state (e.g., started or stopped): ")
 # Define the Ansible command with input variables
 ansible_command = [
     'ansible-playbook',
-    '-i', 'localhost,',
+    '-i', 'Playbooks/inventory.ini,',
     'Playbooks/service_playbook.yml',
     '-e', f'service_name={service_name} desired_state={desired_state}'
 ]
