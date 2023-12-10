@@ -39,7 +39,7 @@ print("3. Run Service")
 print("4. Run Package Manager")
 print("5. Run Directory ")
 print("6. Run Command ")
-print("6. Secure Copy Files")
+print("7. Secure Copy Files")
 
 
 # Get user input for playbook selection
@@ -56,6 +56,8 @@ playbook_functions = {
     4: playbook_four,
     5: playbook_five,
     6: playbook_six,
+    7: playbook_seven,
+
 }
 
 # Check if the selected playbook option exists in the dictionary
