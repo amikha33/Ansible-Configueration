@@ -4,7 +4,7 @@ def run_ansible_playbook(source_path, destination_path, sudo_password):
     playbook_content = f"""
 ---
 - name: Copy File
-  hosts: localhost
+  hosts: all
   become: yes
   gather_facts: false
 
@@ -21,7 +21,7 @@ def run_ansible_playbook(source_path, destination_path, sudo_password):
         playbook_file.write(playbook_content)
 
     try:
-        command = f"ansible-playbook --extra-vars 'ansible_become_pass={sudo_password}' {playbook_path}"
+        command = f"ansible-playbook --inventory-file=Playbooks/inventory.ini --extra-vars 'ansible_become_pass={sudo_password}' {playbook_path}"
         subprocess.run(command, shell=True, check=True)
         print("Ansible playbook executed successfully.")
     except subprocess.CalledProcessError as e:
