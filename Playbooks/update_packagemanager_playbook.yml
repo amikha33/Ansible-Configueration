@@ -1,6 +1,6 @@
 ---
 - name: Update Packages on Ubuntu
-  hosts: localhost
+  hosts: all
   become: yes
 
   tasks:
