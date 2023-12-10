@@ -15,6 +15,7 @@ file_action = input("Enter the file action: ")
 ansible_command = [
     "ansible-playbook",
     "Playbooks/file_playbook_create_delete.yml",
+    "-i", "Playbooks/inventory.ini",
     "-e",
     f"file_name={file_name} file_directory={file_directory} file_action={file_action}",
 ]
