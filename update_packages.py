@@ -2,7 +2,7 @@ import subprocess
 
 def run_ansible_command(tags=None):
     command = [
-        "ansible-playbook", "Playbooks/update_packagemanager_playbook.yml",    "-i", "Playbooks/inventory.ini",
+        "ansible-playbook", "Playbooks/update_packagemanager_playbook.yml", "-i", "Playbooks/inventory.ini",
         "--ask-become-pass"
     ]
 
