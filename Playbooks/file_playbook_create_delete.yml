@@ -1,7 +1,7 @@
 # Example Ansible playbook (create_delete_file.yml)
 ---
 - name: Create or Delete File
-  hosts: localhost
+  hosts: all
   tasks:
     - name: Create File
       ansible.builtin.file:
