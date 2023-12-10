@@ -7,7 +7,7 @@ DIRECTORY_OPERATION = input("Enter directory operation (e.g., create, delete): "
 # Construct the ansible-playbook command
 command = [
     "ansible-playbook",
-    "-i", "Playbooks/inventory.ini,",
+    "-i", "Playbooks/inventory.ini",
     "Playbooks/directory_playbook.yml",
     "--tags", DIRECTORY_OPERATION,
     "--extra-vars", f"directory_name={DIRECTORY_NAME}"
