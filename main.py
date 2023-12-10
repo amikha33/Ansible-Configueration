@@ -44,7 +44,7 @@ print("7. Secure Copy Files")
 
 # Get user input for playbook selection
 try:
-    playbook_option = int(input("Enter the number corresponding to the playbook you want to run (1-6): "))
+    playbook_option = int(input("Enter the number corresponding to the playbook you want to run (1-7): "))
 except ValueError:
     print("Invalid input. Please enter a valid number.")
 
