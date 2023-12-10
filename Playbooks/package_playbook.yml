@@ -10,7 +10,7 @@
         update_cache: yes
 
 - name: Manage Package
-  hosts: localhost
+  hosts: all
   connection: local
   become: yes
 
