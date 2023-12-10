@@ -24,17 +24,23 @@ def playbook_six():
     print("Running Shell Execute Playbook")
     subprocess.run(["python3", "random_playbook_execute_shell.py"])
 
+def playbook_seven():
+    print("Running Shell Execute Playbook")
+    subprocess.run(["python3", "secure_copy_file.py"])
+
 def run_playbook(playbook_function):
     playbook_function()
 
 # Present a clearer prompt for playbook selection
 print("Choose a playbook to run:")
-print("1. Run Package Playbook ")
+print("1. Run Package Playbook")
 print("2. Run File Playbook")
-print("3. Run Service  Three")
+print("3. Run Service")
 print("4. Run Package Manager")
-print("5. Run Directory Five")
-print("6. Run Command Six")
+print("5. Run Directory ")
+print("6. Run Command ")
+print("6. Secure Copy Files")
+
 
 # Get user input for playbook selection
 try:
