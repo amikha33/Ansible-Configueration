@@ -1,6 +1,6 @@
 ---
 - name: Update APT package cache
-  hosts: localhost
+  hosts: all
   connection: local
   become: yes  # Run tasks with elevated privileges (sudo)
 
