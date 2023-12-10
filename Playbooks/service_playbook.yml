@@ -1,4 +1,4 @@
-- hosts: localhost
+- hosts: all
   connection: local
   gather_facts: false
   become: yes  # Run the entire playbook with elevated privileges
